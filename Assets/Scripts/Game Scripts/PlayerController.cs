@@ -1,5 +1,7 @@
 using UnityEngine;
 
+//This code created with ChatGPT
+//rb.MovePosition has changed by me (now player can pass through walls when walks forward and left at the same time. 02.06.2024)
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;

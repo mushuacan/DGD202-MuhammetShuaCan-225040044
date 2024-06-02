@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//This code created with ChatGPT
 public class CreditsButton : MonoBehaviour
 {
     public GameObject creditsPanel; // Credits paneli veya yazýsý
