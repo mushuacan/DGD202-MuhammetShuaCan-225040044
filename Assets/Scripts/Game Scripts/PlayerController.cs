@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded; // Karakterin yere deðip deðmediðini kontrol eder
     private Rigidbody rb;
 
-
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked; // Ýmleci kilitle

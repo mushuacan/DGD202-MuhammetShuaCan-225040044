@@ -7,6 +7,8 @@ public class PlayerTakeItem : MonoBehaviour
     public TextMeshProUGUI collectedText; // UI Text elemaný
     private int collectedCount = 0; // Toplanan nesne sayacý
 
+    public GameObject particleEffectPrefab; // Particle effect prefab'i bu deðiþkene atayýn
+
 
     public AudioClip[] sounds; // Çalýnacak ses dosyalarý (dizi halinde)
     private AudioSource audioSource; // AudioSource bileþeni
@@ -14,6 +16,7 @@ public class PlayerTakeItem : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         // Baþlangýçta toplama sayacýný güncelle
         UpdateUI();
     }
@@ -26,6 +29,7 @@ public class PlayerTakeItem : MonoBehaviour
             Destroy(other.gameObject);
 
             PlaySound();
+            ActivateParticleEffect(other);
 
             // Sayaç deðerini artýr
             collectedCount++;
@@ -43,7 +47,13 @@ public class PlayerTakeItem : MonoBehaviour
     private void PlaySound()
     {
         int randomIndex = Random.Range(0, sounds.Length);
-        audioSource.clip = sounds[randomIndex];
-        audioSource.Play();
+        audioSource.PlayOneShot(sounds[randomIndex]);
+    }
+    private void ActivateParticleEffect(Collider other)
+    {
+        if (particleEffectPrefab != null)
+        {
+            Instantiate(particleEffectPrefab, other.transform.position, Quaternion.identity);
+        }
     }
 }
