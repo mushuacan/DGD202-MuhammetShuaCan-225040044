@@ -28,13 +28,15 @@ public class ExitButtonInGame : MonoBehaviour
         isShowing = !isShowing;
         inGameMenu.SetActive(isShowing);
         if (!isShowing)
-        {
+        {//false
+            Time.timeScale = 1f;
             Cursor.lockState = CursorLockMode.Locked; // Ýmleci kilitle
             Cursor.visible = false; // Ýmleci gizle
         }
         else
-        {
-            Cursor.lockState = CursorLockMode.Confined; // Ýmleci kilitle
+        {//true
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.Confined; // Ýmleci Aç
             Cursor.visible = true; // Ýmleci gizle
         }
         Debug.Log("Esc'ye basýldý. isShowing -> " + isShowing);

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerTakeItem : MonoBehaviour
 {
     public TextMeshProUGUI collectedText; // UI Text elemaný
-    private int collectedCount = 0; // Toplanan nesne sayacý
+    public int collectedCount = 0; // Toplanan nesne sayacý
 
     public PlayerController playerController;
 
