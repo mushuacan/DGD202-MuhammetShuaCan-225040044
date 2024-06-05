@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
+
     }
 
     public void SetMusicVolume()

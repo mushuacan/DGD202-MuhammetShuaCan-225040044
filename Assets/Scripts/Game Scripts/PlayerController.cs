@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 //This code created with ChatGPT
@@ -5,10 +6,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public float moveSpeedBonus = 0f;
+    public float decreaseRate = 1f; // Bonus azalma hýzý
     public float turnSpeed = 10f;
     public float jumpForce = 5f; // Zýplama kuvveti
     private bool isGrounded; // Karakterin yere deðip deðmediðini kontrol eder
     private Rigidbody rb;
+    public TextMeshProUGUI speedText; // UI Text elemaný
 
     void Start()
     {
@@ -28,10 +32,13 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized;
 
         // Hareketi Uygula (karakterin baktýðý yöne göre)
-        Vector3 newPositionHorizontal = transform.TransformDirection(moveHorizontal, 0, 0) * moveSpeed * Time.deltaTime;
-        Vector3 newPositionVertical = transform.TransformDirection(0, 0, moveVertical) * moveSpeed * Time.deltaTime;
+        Vector3 newPositionHorizontal = transform.TransformDirection(moveHorizontal, 0, 0) * (moveSpeed + moveSpeedBonus) * Time.deltaTime;
+        Vector3 newPositionVertical = transform.TransformDirection(0, 0, moveVertical) * (moveSpeed + moveSpeedBonus) * Time.deltaTime;
         Vector3 newPosition = rb.position + newPositionHorizontal + newPositionVertical;
         rb.MovePosition(newPosition);
+
+        moveSpeedBonus = Mathf.Max(0f, moveSpeedBonus - decreaseRate * Time.deltaTime);
+        UpdateUISpeedText();
 
         // Dönüþü Uygula
         transform.Rotate(0, turnHorizontal * turnSpeed, 0);
@@ -42,6 +49,12 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
         }
+    }
+
+    private void UpdateUISpeedText()
+    {
+        // UI Text elemanýndaki metni güncelle
+        speedText.text = "Speed: " + (moveSpeed + Mathf.Round(moveSpeedBonus * 10f) / 10f);
     }
 
     void OnCollisionEnter(Collision collision)
