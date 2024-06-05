@@ -326,9 +326,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "For coding:\nChat GPT\nhttps://forum.unity.com/\n\nMusics:\nMenu Music:\nCasual
-    Game BGM Pack #5 \nGame Music:\nCreate with Code Course Library\nLose & Win music:\nAge
-    of Empires II\n\nParticles:\nCreate with Code Course Library"
+  m_text: "For coding:\nChat GPT\nhttps://forum.unity.com/\n\nMenu Music:\nCasual
+    Game BGM Pack #5 \n\nGame Music:\nCreate with Code Course Library\n\nLose & Win
+    music:\nAge of Empires II\n\nSFX:\nKenney\nCreate with Code Course Library\n\nParticles:\nCreate
+    with Code Course Library"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -576,7 +577,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 469, y: -44}
-  m_SizeDelta: {x: 474.8, y: 780.58}
+  m_SizeDelta: {x: 474.8, y: 867.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &341326613
 MonoBehaviour:
@@ -1905,7 +1906,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -121.84094, y: -94.123535, z: -132.24329, w: -87.02014}
+  m_margin: {x: -121.84094, y: -80.65039, z: -132.24329, w: -87.02014}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
