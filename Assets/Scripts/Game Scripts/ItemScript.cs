@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections;
-using System.Threading;
 
 public class ItemScript : MonoBehaviour
 {
     public float transitionDuration = 5f; // Rengin dönüþüm süresi
     public Color targetColor = Color.green; // Hedef renk
+    public Color targetColor2 = Color.red; // Hedef renk
     public float fadeOutDuration = 1f; // Soluklaþma süresi
 
-    private Renderer rend;
+    public Renderer rend;
     private Color originalColor;
     private bool isFading = false;
 
@@ -21,7 +21,6 @@ public class ItemScript : MonoBehaviour
     {
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource = GetComponent<AudioSource>();
-        rend = GetComponent<Renderer>();
         originalColor = rend.material.color;
         StartCoroutine(ChangeColorOverTime());
     }
@@ -43,7 +42,7 @@ public class ItemScript : MonoBehaviour
         {
             Instantiate(particleEffectPrefab, transform.position, Quaternion.identity);
         }
-        transform.position = new Vector3(transform.position.x ,transform.position.y - 2, transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y - 4, transform.position.z);
         PlaySound();
         yield return new WaitForSeconds(3f);
         Destroy(gameObject); // Kendini imha et
