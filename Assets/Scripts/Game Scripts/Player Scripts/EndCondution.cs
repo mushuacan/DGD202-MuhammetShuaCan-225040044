@@ -54,12 +54,12 @@ public class EndCondution : MonoBehaviour
         if (won)
         {
             resultText.text = "You Won";
-            conditionText.text = "You collected more than " + winCond ; 
+            conditionText.text = "You collected more than " + winCond + " apples"; 
         }
         else
         {
             resultText.text = "Lost";
-            conditionText.text = "You couldn't collect more than " + winCond;
+            conditionText.text = "You couldn't collect more than " + winCond + " apples";
         }
     }
 }
