@@ -39053,7 +39053,6 @@ GameObject:
   - component: {fileID: 1070273576}
   - component: {fileID: 1070273575}
   - component: {fileID: 1070273574}
-  - component: {fileID: 1070273573}
   m_Layer: 5
   m_Name: Exit Button
   m_TagString: Untagged
@@ -39081,19 +39080,6 @@ RectTransform:
   m_AnchoredPosition: {x: -106, y: 39}
   m_SizeDelta: {x: 172.1, y: 44.6}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1070273573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1070273571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fff0da61b48075a4c8f729db1a29ecfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inGameMenu: {fileID: 493556472}
 --- !u!114 &1070273574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39138,7 +39124,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1070273573}
+      - m_Target: {fileID: 1494587960}
         m_TargetAssemblyTypeName: ExitButtonInGame, Assembly-CSharp
         m_MethodName: OnExitButtonPressed
         m_Mode: 1
@@ -47873,7 +47859,6 @@ GameObject:
   - component: {fileID: 1348368746}
   - component: {fileID: 1348368745}
   - component: {fileID: 1348368744}
-  - component: {fileID: 1348368743}
   m_Layer: 5
   m_Name: Return Game
   m_TagString: Untagged
@@ -47901,19 +47886,6 @@ RectTransform:
   m_AnchoredPosition: {x: -362, y: 51}
   m_SizeDelta: {x: 196.5, y: 56.2}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1348368743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1348368741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fff0da61b48075a4c8f729db1a29ecfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inGameMenu: {fileID: 493556472}
 --- !u!114 &1348368744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53935,7 +53907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1521616864
 RectTransform:
   m_ObjectHideFlags: 0

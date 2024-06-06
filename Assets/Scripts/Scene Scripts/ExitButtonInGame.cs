@@ -23,29 +23,28 @@ public class ExitButtonInGame : MonoBehaviour
         }
     }
 
-    private void InGameMenu()
+    public void InGameMenu()
     {
         isShowing = !isShowing;
         MenuSetActive(isShowing);
-        if (!isShowing)
+
+        if (isShowing)
+        {//true
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.Confined; // Ýmleci Aç
+            Cursor.visible = true; // Ýmleci gizle
+        }
+        else
         {//false
             Time.timeScale = 1f;
             Cursor.lockState = CursorLockMode.Locked; // Ýmleci kilitle
             Cursor.visible = false; // Ýmleci gizle
         }
-        else
-        {//true
-            Time.timeScale = 0f;
-            Cursor.lockState = CursorLockMode.Confined; // Ýmleci Aç
-            Cursor.visible = true; // Ýmleci gizle
-            Debug.Log("Esc menüsü açýldý");
-        }
-        Debug.Log("Esc'ye basýldý. isShowing -> " + isShowing);
     }
 
     private void MenuSetActive(bool activation)
     {
-        inGameMenu.SetActive(activation);
+        inGameMenu.gameObject.SetActive(activation);
     }
 
     public void OnExitButtonPressed()
