@@ -4,6 +4,7 @@ public class CharacterMovement : MonoBehaviour
 {
     public float swaySpeed = 2f; 
     public int position = 1;
+    public float howMuchSway = 1f;
 
     private float timer = 0f;
 
@@ -18,7 +19,7 @@ public class CharacterMovement : MonoBehaviour
         // Karakteri saða veya sola salla
         if (Time.timeScale != 0f )
         {
-            transform.localPosition += (Vector3.right * Mathf.Sin(timer * 8) * swaySpeed * 0.003f);
+            transform.localPosition += (Vector3.right * Mathf.Sin(timer * 8) * swaySpeed * 0.003f * howMuchSway);
         }
     }
 }
