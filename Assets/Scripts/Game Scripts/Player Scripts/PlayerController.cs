@@ -32,16 +32,19 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical).normalized;
 
         // Hareketi Uygula (karakterin baktýðý yöne göre)
-        Vector3 newPositionHorizontal = transform.TransformDirection(moveHorizontal, 0, 0) * (moveSpeed + moveSpeedBonus) * Time.deltaTime;
-        Vector3 newPositionVertical = transform.TransformDirection(0, 0, moveVertical) * (moveSpeed + moveSpeedBonus) * Time.deltaTime;
-        Vector3 newPosition = rb.position + newPositionHorizontal + newPositionVertical;
-        rb.MovePosition(newPosition);
+        if (Time.timeScale != 0)
+        {
+            Vector3 newPositionHorizontal = transform.TransformDirection(moveHorizontal, 0, 0) * (moveSpeed + moveSpeedBonus) * Time.deltaTime;
+            Vector3 newPositionVertical = transform.TransformDirection(0, 0, moveVertical) * (moveSpeed + moveSpeedBonus) * Time.deltaTime;
+            Vector3 newPosition = rb.position + newPositionHorizontal + newPositionVertical;
+            rb.MovePosition(newPosition);
 
-        moveSpeedBonus = Mathf.Max(0f, moveSpeedBonus - decreaseRate * Time.deltaTime);
-        UpdateUISpeedText();
+            moveSpeedBonus = Mathf.Max(0f, moveSpeedBonus - decreaseRate * Time.deltaTime);
+            UpdateUISpeedText();
 
-        // Dönüþü Uygula
-        transform.Rotate(0, turnHorizontal * turnSpeed, 0);
+            // Dönüþü Uygula
+            transform.Rotate(0, turnHorizontal * turnSpeed, 0);
+        }
 
         // Zýplama Ýþlemi
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))

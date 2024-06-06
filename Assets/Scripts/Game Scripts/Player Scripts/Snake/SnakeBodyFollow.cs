@@ -5,7 +5,7 @@ public class SnakeBodyFollow : MonoBehaviour
     public Transform target; // Takip edilecek obje
     public float distance = 5f; // Ýki obje arasýndaki mesafe
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (target != null)
         {
