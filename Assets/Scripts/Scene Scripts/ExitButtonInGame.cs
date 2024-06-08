@@ -20,7 +20,7 @@ public class ExitButtonInGame : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(Time.time < endCondution.gameTime)
+            if(Time.timeSinceLevelLoad < endCondution.gameTime)
             {
                 InGameMenu();
             }
