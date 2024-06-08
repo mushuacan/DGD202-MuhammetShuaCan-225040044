@@ -7,6 +7,7 @@ using System.Collections;
 public class ExitButtonInGame : MonoBehaviour
 {
     public GameObject inGameMenu; // Çýkýþ yazýsý için referans
+    public EndCondution endCondution;
 
     private bool isShowing = false;
 
@@ -19,7 +20,10 @@ public class ExitButtonInGame : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            InGameMenu();
+            if(Time.time < endCondution.gameTime)
+            {
+                InGameMenu();
+            }
         }
     }
 

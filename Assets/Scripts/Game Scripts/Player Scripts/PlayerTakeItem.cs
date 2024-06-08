@@ -8,6 +8,7 @@ public class PlayerTakeItem : MonoBehaviour
     public int collectedCount = 0; // Toplanan nesne sayacý
 
     public PlayerController playerController;
+    public SnakeGrowUp snakeBody;
 
     public GameObject particleEffectPrefab; // Particle effect prefab'i bu deðiþkene atayýn
 
@@ -23,6 +24,15 @@ public class PlayerTakeItem : MonoBehaviour
         UpdateUICollectedItem();
     }
 
+    private void Update()
+    {
+        //Hile kodu
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            CollectedCountIncrease(4);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("interactable"))
@@ -34,12 +44,17 @@ public class PlayerTakeItem : MonoBehaviour
             PlaySound();
             ActivateParticleEffect(other);
 
-            // Sayaç deðerini artýr
-            collectedCount++;
-
-            // UI'yý güncelle
-            UpdateUICollectedItem();
+            CollectedCountIncrease();
         }
+    }
+
+    public void CollectedCountIncrease(int howMuch = 1)
+    {
+        // Sayaç deðerini artýr
+        collectedCount += howMuch;
+        UpdateUICollectedItem();
+        snakeBody.Collect();
+
     }
 
     private void UpdateUICollectedItem()
