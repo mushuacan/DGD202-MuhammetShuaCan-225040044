@@ -10,7 +10,6 @@ public class ItemScript : MonoBehaviour
 
     public Renderer rend;
     private Color originalColor;
-    private bool isFading = false;
 
     public GameObject particleEffectPrefab; // Particle effect prefab'i bu deðiþkene atayýn
 
@@ -29,7 +28,6 @@ public class ItemScript : MonoBehaviour
     {
         yield return new WaitForSeconds(transitionDuration);
 
-        isFading = true;
         float elapsedTime = 0f;
         while (elapsedTime < fadeOutDuration)
         {

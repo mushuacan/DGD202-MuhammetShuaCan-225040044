@@ -10,12 +10,17 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
+        musicSlider.value = PlayerPrefs.GetFloat("Music");
+        sfxSlider.value = PlayerPrefs.GetFloat("SFX");
 
+        SetMusicVolume();
+        SetSFXVolume();
     }
 
     public void SetMusicVolume()
     {
         float valume = musicSlider.value;
+        PlayerPrefs.SetFloat("Music", valume);
         audioMixer.SetFloat("Music", Mathf.Log10(valume) *20);
         Debug.Log("music value is: " + valume);
     }
@@ -23,6 +28,7 @@ public class AudioManager : MonoBehaviour
     public void SetSFXVolume()
     {
         float valume = sfxSlider.value;
+        PlayerPrefs.SetFloat("SFX", valume);
         audioMixer.SetFloat("SFX", Mathf.Log10(valume) * 20);
         Debug.Log("sfx value is: " + valume);
     }

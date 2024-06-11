@@ -11336,7 +11336,7 @@ MonoBehaviour:
   m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.582
+  m_Value: 0.829
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -11639,7 +11639,6 @@ GameObject:
   - component: {fileID: 317962277}
   - component: {fileID: 317962286}
   - component: {fileID: 317962284}
-  - component: {fileID: 317962287}
   - component: {fileID: 317962282}
   - component: {fileID: 317962285}
   m_Layer: 0
@@ -11926,18 +11925,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e2e2362a44d0ff4f8e5807dd8e8b764, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &317962287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 317962276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a65131aed0f8aea48ab58f151aa32c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &318338613
@@ -48519,7 +48506,7 @@ MonoBehaviour:
   m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.582
+  m_Value: 0.162
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

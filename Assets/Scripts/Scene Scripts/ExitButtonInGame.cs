@@ -35,14 +35,14 @@ public class ExitButtonInGame : MonoBehaviour
         if (isShowing)
         {//true
             Time.timeScale = 0f;
-            Cursor.lockState = CursorLockMode.Confined; // Ýmleci Aç
-            Cursor.visible = true; // Ýmleci gizle
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
         }
         else
         {//false
             Time.timeScale = 1f;
-            Cursor.lockState = CursorLockMode.Locked; // Ýmleci kilitle
-            Cursor.visible = false; // Ýmleci gizle
+            Cursor.lockState = CursorLockMode.Locked; 
+            Cursor.visible = false; 
         }
     }
 
