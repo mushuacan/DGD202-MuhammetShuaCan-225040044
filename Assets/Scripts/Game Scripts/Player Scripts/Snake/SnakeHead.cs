@@ -6,22 +6,30 @@ public class SnakeHead : MonoBehaviour
 
     void Update()
     {
+        Vector3 direction = Vector3.zero;
+
         // W, A, S, D tuþlarýný kontrol et
         if (Input.GetKey(KeyCode.W))
         {
-            Rotate(Vector3.forward);
+            direction += Vector3.forward;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            Rotate(Vector3.back);
+            direction += Vector3.back;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            Rotate(Vector3.left);
+            direction += Vector3.left;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            Rotate(Vector3.right);
+            direction += Vector3.right;
+        }
+
+        // Eðer direction sýfýr deðilse, yönü normalize et ve rotasyonu uygula
+        if (direction != Vector3.zero)
+        {
+            Rotate(direction.normalized);
         }
     }
 
@@ -32,3 +40,4 @@ public class SnakeHead : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, transform.parent.rotation * toRotation, rotationSpeed * Time.deltaTime);
     }
 }
+

@@ -20,8 +20,10 @@ public class ExitButtonInGame : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(Time.timeSinceLevelLoad < endCondution.gameTime)
+            if(Time.timeSinceLevelLoad + 0.5f < endCondution.gameTime)
             {
+                Debug.Log("Oyun baþýndan beri geçen zaman -> " + Time.timeSinceLevelLoad);
+                Debug.Log("Oyunun durma vakti -> " + endCondution.gameTime);
                 InGameMenu();
             }
         }

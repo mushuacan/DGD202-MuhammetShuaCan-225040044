@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EndCondution : MonoBehaviour
 {
     public float gameTime = 60f; // Oyun süresi (saniye cinsinden)
     public float winCond = 60f;
+    public Image endGameMenuImage;
+    public Color winColor;
+    public Color loseColor;
     public TextMeshProUGUI resultText; // Sonuç metni için UI Text
     public TextMeshProUGUI conditionText; // Sonuç metni için UI Text
     public PlayerTakeItem playerTakeItem;
@@ -15,7 +20,7 @@ public class EndCondution : MonoBehaviour
     public ChangeMusic changeMusic;
 
     private float timer = 0f;
-    private bool gameEnded = false;
+    public bool gameEnded = false;
 
 
     private void Start()
@@ -42,7 +47,8 @@ public class EndCondution : MonoBehaviour
                 changeMusic.EndGame();
                 Cursor.lockState = CursorLockMode.Confined; 
                 Cursor.visible = true; 
-                Time.timeScale = 0f;
+                Camera.main.GetComponent<EndedGameCameraScript>().EndGame();
+                Time.timeScale = 0; // Zamaný durdur
             }
         }
         timerText.text = "Time: " + Mathf.Round((gameTime - timer) * 10f) / 10f;
@@ -54,11 +60,13 @@ public class EndCondution : MonoBehaviour
         if (won)
         {
             resultText.text = "You Won";
+            endGameMenuImage.color = winColor;
             conditionText.text = "You collected more than " + winCond + " apples"; 
         }
         else
         {
             resultText.text = "Lost";
+            endGameMenuImage.color = loseColor;
             conditionText.text = "You couldn't collect more than " + winCond + " apples";
         }
     }

@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float turnSpeed = 10f;
     public float jumpForce = 5f; // Zýplama kuvveti
     private bool isGrounded; // Karakterin yere deðip deðmediðini kontrol eder
+    private bool isJumpEnable = false;
     private Rigidbody rb;
     public TextMeshProUGUI speedText; // UI Text elemaný
 
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Zýplama Ýþlemi
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space) && isJumpEnable)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;

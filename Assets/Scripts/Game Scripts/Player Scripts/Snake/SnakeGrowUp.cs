@@ -164,7 +164,7 @@ public class SnakeGrowUp : MonoBehaviour
     {
         // Nesne toplandýðýnda çaðrýlacak
         
-        if (segments.Count - 2 < (player.collectedCount / 10))
+        if (segments.Count - initialSize + 1 < (player.collectedCount / 10))
         {
             Grow();
         }
