@@ -22,7 +22,7 @@ public class SnakeGrowUp : MonoBehaviour
     }
 
 
-    void AddSegment()
+    void AddSegment() //ÇÖZÜLECEK ALAN Target nesnesini bulamýyor.
     {
         // Yeni bir segment ekle
         GameObject newSegment = Instantiate(bodyPrefab);
@@ -31,7 +31,7 @@ public class SnakeGrowUp : MonoBehaviour
 
         if (bodyFollow == null || characterMovement == null)
         {
-            Debug.LogError("Yeni segmentte SnakeBodyFollow veya SnakeBody bileþeni bulunamadý!");
+            Debug.LogError("Yeni segmentte SnakeBodyFollow veya SnakeBody bileþeni bulunamadý! #AddSegment");
             return;
         }
 
@@ -43,7 +43,7 @@ public class SnakeGrowUp : MonoBehaviour
             targetTransform = segments[segments.Count - 1].transform.Find("Target");
             if (targetTransform == null)
             {
-                Debug.LogError("Önceki segmentte 'Target' adlý bir alt nesne bulunamadý!");
+                Debug.LogError("Önceki segmentte 'Target' adlý bir alt nesne bulunamadý! #AddSegment");
                 return;
             }
         }
@@ -53,7 +53,7 @@ public class SnakeGrowUp : MonoBehaviour
             targetTransform = transform.Find("Target");
             if (targetTransform == null)
             {
-                Debug.LogError("Yýlanýn baþýnda 'Target' adlý bir alt nesne bulunamadý!");
+                Debug.LogError("Yýlanýn baþýnda 'Target' adlý bir alt nesne bulunamadý! #AddSegment");
                 return;
             }
         }
@@ -86,7 +86,7 @@ public class SnakeGrowUp : MonoBehaviour
 
             if (bodyFollow == null || characterMovement == null)
             {
-                Debug.LogError("Yeni gövde segmentinde SnakeBodyFollow veya SnakeBody bileþeni bulunamadý!");
+                Debug.LogError("Yeni gövde segmentinde SnakeBodyFollow veya SnakeBody bileþeni bulunamadý! #UpdateTale");
                 return;
             }
 
@@ -97,7 +97,7 @@ public class SnakeGrowUp : MonoBehaviour
                 targetTransform = segments[segments.Count - 1].transform.Find("Target");
                 if (targetTransform == null)
                 {
-                    Debug.LogError("Önceki segmentte 'Target' adlý bir alt nesne bulunamadý!");
+                    Debug.LogError("Önceki segmentte 'Target' adlý bir alt nesne bulunamadý! #UpdateTale");
                     return;
                 }
             }
@@ -106,7 +106,7 @@ public class SnakeGrowUp : MonoBehaviour
                 targetTransform = transform.Find("Target");
                 if (targetTransform == null)
                 {
-                    Debug.LogError("Yýlanýn baþýnda 'Target' adlý bir alt nesne bulunamadý!");
+                    Debug.LogError("Yýlanýn baþýnda 'Target' adlý bir alt nesne bulunamadý! #UpdateTale");
                     return;
                 }
             }
@@ -156,7 +156,7 @@ public class SnakeGrowUp : MonoBehaviour
     public void Grow()
     {
         // Yýlaný büyüt
-        AddSegment();
+        //AddSegment();
         UpdateTail();
     }
 

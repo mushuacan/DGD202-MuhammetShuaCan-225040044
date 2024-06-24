@@ -28,5 +28,9 @@ public class SnakeBody : MonoBehaviour
     {
         position = index * 2;
         howMuchSway = 1f / (7f - position);
+        if (howMuchSway < 0f)
+        {
+            howMuchSway = 0;
+        }
     }
 }

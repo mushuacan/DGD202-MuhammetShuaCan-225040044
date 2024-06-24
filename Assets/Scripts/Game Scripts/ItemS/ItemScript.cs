@@ -21,6 +21,10 @@ public class ItemScript : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource = GetComponent<AudioSource>();
         originalColor = rend.material.color;
+    }
+
+    private void OnEnable()
+    {
         StartCoroutine(ChangeColorOverTime());
     }
 
@@ -43,11 +47,13 @@ public class ItemScript : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y - 4, transform.position.z);
         PlaySound();
         yield return new WaitForSeconds(3f);
-        Destroy(gameObject); // Kendini imha et
+        gameObject.SetActive(false);
     }
     private void PlaySound()
     {
         int randomIndex = Random.Range(0, sounds.Length);
         audioSource.PlayOneShot(sounds[randomIndex]);
     }
+
+
 }

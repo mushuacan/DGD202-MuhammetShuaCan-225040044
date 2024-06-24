@@ -37,8 +37,7 @@ public class PlayerTakeItem : MonoBehaviour
     {
         if (other.gameObject.CompareTag("interactable"))
         {
-            // Toplanan nesneyi yok et
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
 
             playerController.moveSpeedBonus = 5f;
             PlaySound();

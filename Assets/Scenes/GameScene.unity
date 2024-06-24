@@ -34934,6 +34934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 969922939}
   - component: {fileID: 969922938}
+  - component: {fileID: 969922940}
   m_Layer: 0
   m_Name: ItemManager
   m_TagString: Untagged
@@ -34956,6 +34957,9 @@ MonoBehaviour:
   prefab: {fileID: 1985319204337406029, guid: 1697fb4cd06db4f4eb20fc558ff09e7f, type: 3}
   spawnInterval: 0.5
   spawnRange: {x: -10, y: 10}
+  objectPool: {fileID: 969922940}
+  parentTransform: {fileID: 969922939}
+  objectLifetime: 25
 --- !u!4 &969922939
 Transform:
   m_ObjectHideFlags: 0
@@ -34971,6 +34975,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &969922940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969922937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 542342ca5e25d324bbe55b60abf15700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1985319204337406029, guid: 1697fb4cd06db4f4eb20fc558ff09e7f, type: 3}
+  poolSize: 20
+  parentTransform: {fileID: 969922939}
 --- !u!4 &970679410 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4408158000586952, guid: 55e73b62d9426bc4fbbb29492d789f37, type: 3}
@@ -75052,7 +75071,7 @@ SceneRoots:
   - {fileID: 35558445}
   - {fileID: 317962281}
   - {fileID: 720142106}
-  - {fileID: 1659954369}
   - {fileID: 567394191}
   - {fileID: 969922939}
+  - {fileID: 1659954369}
   - {fileID: 1193719051}
