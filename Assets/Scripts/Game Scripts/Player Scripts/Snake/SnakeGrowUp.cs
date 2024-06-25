@@ -156,7 +156,7 @@ public class SnakeGrowUp : MonoBehaviour
     public void Grow()
     {
         // Yýlaný büyüt
-        AddSegment();
+        //AddSegment();
         UpdateTail();
     }
 
