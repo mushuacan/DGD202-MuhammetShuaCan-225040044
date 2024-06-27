@@ -12795,7 +12795,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 0.35
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -12905,6 +12905,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 67b1a4bffa69f3246a357d5117f6947e, type: 3}
   - {fileID: 8300000, guid: d37291f9ebe735343b8e90d583054e39, type: 3}
   - {fileID: 8300000, guid: 3c0253a8ea2f0104fbf7bea2a7fd6903, type: 3}
+  - {fileID: 8300000, guid: 1ca5a9507fbd90f4293082611132a14c, type: 3}
 --- !u!114 &340082703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52794,6 +52795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inGameMenu: {fileID: 493556472}
   endCondution: {fileID: 567394190}
+  changeMusic: {fileID: 340082702}
 --- !u!4 &1496710968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4408158000586952, guid: 55e73b62d9426bc4fbbb29492d789f37, type: 3}

@@ -9,6 +9,8 @@ public class ChangeMusic : MonoBehaviour
     public AudioClip[] musics;
     private List<int> musicIndices;
     private int currentMusicIndex;
+    private AudioClip previousMusic;
+    private float musicOffset;
 
     void Start()
     {
@@ -40,6 +42,7 @@ public class ChangeMusic : MonoBehaviour
 
         // Ýlk müziði çal
         PlayNextMusic();
+
     }
 
     void InitializeMusicIndices()
@@ -70,7 +73,9 @@ public class ChangeMusic : MonoBehaviour
         {
             musicSource.clip = musics[musicIndices[currentMusicIndex]];
             musicSource.Play();
-            currentMusicIndex++;
+            currentMusicIndex++; 
+            Debug.Log("Now playing: " + musicSource.clip.name + ", Length: " + musicSource.clip.length + " seconds");
+
         }
         else
         {
@@ -78,6 +83,28 @@ public class ChangeMusic : MonoBehaviour
             InitializeMusicIndices();
             PlayNextMusic();
         }
+    }
+
+    public void PauseGame()
+    {
+        musicOffset = musicSource.time;
+
+        // Çalan müziði durdur
+        previousMusic = musicSource.clip;
+        musicSource.Stop();
+
+        // Menü müziðini çal
+        musicSource.clip = musics[14]; //Menü müziði eklenecek
+        musicSource.time = 1f;
+        musicSource.Play();
+        Debug.Log("Durdurulan müzik ve saniyesi: " + previousMusic + ", " + musicOffset);
+    }
+    public void ResumeGame()
+    {
+        musicSource.clip = previousMusic;
+        musicSource.time = musicOffset; // Kaydedilmiþ offset deðeri ile müziði baþlat
+        Debug.Log("Baþlatýlacak müzik ve saniyesi " + previousMusic + ", " + musicOffset);
+        musicSource.Play();
     }
 
     public void EndGame()

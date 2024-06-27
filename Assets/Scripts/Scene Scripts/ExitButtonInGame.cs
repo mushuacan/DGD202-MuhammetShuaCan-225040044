@@ -8,6 +8,7 @@ public class ExitButtonInGame : MonoBehaviour
 {
     public GameObject inGameMenu; // Çýkýþ yazýsý için referans
     public EndCondution endCondution;
+    public ChangeMusic changeMusic;
 
     private bool isShowing = false;
 
@@ -25,6 +26,7 @@ public class ExitButtonInGame : MonoBehaviour
                 //Debug.Log("Oyun baþýndan beri geçen zaman -> " + Time.timeSinceLevelLoad);
                 //Debug.Log("Oyunun durma vakti -> " + endCondution.gameTime);
                 InGameMenu();
+                
             }
         }
     }
@@ -39,12 +41,14 @@ public class ExitButtonInGame : MonoBehaviour
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
+            changeMusic.PauseGame();
         }
         else
         {//false
             Time.timeScale = 1f;
             Cursor.lockState = CursorLockMode.Locked; 
-            Cursor.visible = false; 
+            Cursor.visible = false;
+            changeMusic.ResumeGame();
         }
     }
 
