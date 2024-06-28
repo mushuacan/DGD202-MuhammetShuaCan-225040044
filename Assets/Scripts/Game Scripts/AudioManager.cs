@@ -16,22 +16,30 @@ public class AudioManager : MonoBehaviour
 
         SetMusicVolume();
         SetSFXVolume();
+        audioMixer.SetFloat("Music for End", -80);
     }
 
     public void SetMusicVolume()
     {
-        float valume = musicSlider.value;
-        PlayerPrefs.SetFloat("Music", valume);
-        audioMixer.SetFloat("Music", Mathf.Log10(valume) *20);
-        Debug.Log("music value is: " + valume);
+        float volume = musicSlider.value;
+        PlayerPrefs.SetFloat("Music", volume);
+        audioMixer.SetFloat("Music", Mathf.Log10(volume) * 20);
+        Debug.Log("music value is: " + volume);
+    }
+    public void SetMusicVolumeForEndOfGame(float yüzdelik)
+    {
+        float volume = PlayerPrefs.GetFloat("Music");
+        audioMixer.SetFloat("Music", Mathf.Log10(volume * (yüzdelik)) * 20 );
+        audioMixer.SetFloat("Music for End", (Mathf.Log10(volume * (1 - yüzdelik)) * 20) - 7f);
+
     }
 
     public void SetSFXVolume()
     {
-        float valume = sfxSlider.value;
-        PlayerPrefs.SetFloat("SFX", valume);
-        audioMixer.SetFloat("SFX", Mathf.Log10(valume) * 20);
-        Debug.Log("sfx value is: " + valume);
+        float volume = sfxSlider.value;
+        PlayerPrefs.SetFloat("SFX", volume);
+        audioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+        Debug.Log("sfx value is: " + volume);
     }
 }
 

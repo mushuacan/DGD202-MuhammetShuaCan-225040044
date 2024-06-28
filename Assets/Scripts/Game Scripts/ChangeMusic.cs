@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,11 +13,13 @@ public class ChangeMusic : MonoBehaviour
     private AudioClip previousMusic;
     private float musicOffset;
 
+    private bool didGameEnded = false;
+
     void Start()
     {
         // Belirli tarihte özel müzik çalma kontrolü
         DateTime today = DateTime.Today;
-        if (today.Month == 6 && today.Day == 28)
+        if (today.Month == 7 && today.Day == 23)
         {
             // Belirli tarihte çalacak özel müzik 
             musicSource.clip = musics[0];
@@ -69,13 +72,18 @@ public class ChangeMusic : MonoBehaviour
 
     void PlayNextMusic()
     {
+        if (didGameEnded)
+        {
+            return;
+        }
         if (currentMusicIndex < musicIndices.Count)
         {
             musicSource.clip = musics[musicIndices[currentMusicIndex]];
             musicSource.Play();
             currentMusicIndex++; 
             Debug.Log("Now playing: " + musicSource.clip.name + ", Length: " + musicSource.clip.length + " seconds");
-
+            DOVirtual.DelayedCall(musicSource.clip.length, PlayNextMusic);
+            Debug.Log("Next music is: " + musics[musicIndices[currentMusicIndex]]);
         }
         else
         {
@@ -109,6 +117,7 @@ public class ChangeMusic : MonoBehaviour
 
     public void EndGame()
     {
+        didGameEnded = true;
         // Oyun bittiðinde müziði durdur
         musicSource.Stop();
 
@@ -119,15 +128,15 @@ public class ChangeMusic : MonoBehaviour
         }
     }
 
-    public void ChangeMusicClip(bool won)
+    public void ChangeMusicClipAtEndofGame(bool won)
     {
         if (won)
         {
-            musicSource.clip = musics[13];
+            musicSource.clip = musics[12];
         }
         else
         {
-            musicSource.clip = musics[14];
+            musicSource.clip = musics[13];
         }
     }
 }

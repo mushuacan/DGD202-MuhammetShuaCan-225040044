@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,9 +19,14 @@ public class EndCondution : MonoBehaviour
     public GameObject EndMenu;
     public TextMeshProUGUI timerText;
     public ChangeMusic changeMusic;
+    public AudioManager audioManager;
 
     private float timer = 0f;
     public bool gameEnded = false;
+    public bool endMusicStarted = false;
+
+    public AudioSource audioSource;
+    public AudioClip endMusicClip;
 
 
     private void Start()
@@ -33,6 +39,9 @@ public class EndCondution : MonoBehaviour
         if (!gameEnded)
         {
             timer += Time.deltaTime;
+
+            CheckForWin(timer, gameTime);
+
             if (timer >= gameTime)
             {
                 if (playerTakeItem.collectedCount >= winCond - 1f)
@@ -55,7 +64,8 @@ public class EndCondution : MonoBehaviour
     }
     void EndGame(bool won)
     {
-        changeMusic.ChangeMusicClip(won);
+        audioManager.SetMusicVolume();
+        changeMusic.ChangeMusicClipAtEndofGame(won);
         gameEnded = true;
         if (won)
         {
@@ -68,6 +78,29 @@ public class EndCondution : MonoBehaviour
             resultText.text = "Lost";
             endGameMenuImage.color = loseColor;
             conditionText.text = "You couldn't collect more than " + winCond + " apples";
+        }
+    }
+    void CheckForWin(float timer, float timerToEnd)
+    {
+        int item = playerTakeItem.collectedCount;
+        if ((timer + 13.4f) >= timerToEnd && 
+            timer + 13 <= timerToEnd && 
+            !endMusicStarted && 
+            ((timerToEnd / winCond) >= (timer / item)))
+        {
+            audioSource.clip = endMusicClip;
+            audioSource.Play();
+            endMusicStarted = !endMusicStarted;
+        }
+
+        if (endMusicStarted)
+        {
+            float hesap = (timerToEnd - timer) / 5;
+            if (hesap <= 1)
+            {
+                audioManager.SetMusicVolumeForEndOfGame(hesap);
+                Debug.Log("Hesap -> " + hesap);
+            }
         }
     }
 }
