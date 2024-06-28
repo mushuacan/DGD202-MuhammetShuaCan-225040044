@@ -42,6 +42,7 @@ public class ExitButtonInGame : MonoBehaviour
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
             changeMusic.PauseGame();
+            endCondution.CancelCoolWinMusic();
         }
         else
         {//false

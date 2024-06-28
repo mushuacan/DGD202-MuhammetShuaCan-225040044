@@ -19,7 +19,7 @@ public class ChangeMusic : MonoBehaviour
     {
         // Belirli tarihte özel müzik çalma kontrolü
         DateTime today = DateTime.Today;
-        if (today.Month == 7 && today.Day == 23)
+        if (today.Month == 6 && today.Day == 28)
         {
             // Belirli tarihte çalacak özel müzik 
             musicSource.clip = musics[0];

@@ -24,6 +24,7 @@ public class EndCondution : MonoBehaviour
     private float timer = 0f;
     public bool gameEnded = false;
     public bool endMusicStarted = false;
+    public bool didMusicCancelled = false;
 
     public AudioSource audioSource;
     public AudioClip endMusicClip;
@@ -82,11 +83,11 @@ public class EndCondution : MonoBehaviour
     }
     void CheckForWin(float timer, float timerToEnd)
     {
+        if (didMusicCancelled) return;
+
         int item = playerTakeItem.collectedCount;
-        if ((timer + 13.4f) >= timerToEnd && 
-            timer + 13 <= timerToEnd && 
-            !endMusicStarted && 
-            ((timerToEnd / winCond) >= (timer / item)))
+        if ((timer + 13.4f) >= timerToEnd && timer + 13 <= timerToEnd && 
+            !endMusicStarted && ((timerToEnd / winCond) >= (timer / item)))
         {
             audioSource.clip = endMusicClip;
             audioSource.Play();
@@ -101,6 +102,15 @@ public class EndCondution : MonoBehaviour
                 audioManager.SetMusicVolumeForEndOfGame(hesap);
                 Debug.Log("Hesap -> " + hesap);
             }
+        }
+    }
+    public void CancelCoolWinMusic() //Oyuncu oyunu durdurunca müziði durdurur ve bir daha çalmasýný engeller.
+    {
+        if(endMusicStarted)
+        {
+            audioManager.SetMusicVolume();
+            audioSource.Stop();
+            didMusicCancelled = true;
         }
     }
 }

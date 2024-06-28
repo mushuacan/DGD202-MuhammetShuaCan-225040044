@@ -9,6 +9,7 @@ public class ItemScript : MonoBehaviour
     public float colorChangeTime2 = 5f; // Soluklaþma süresi
     public float colorChangeTime3 = 2f; // Soluklaþma süresi
     public float lifeTime = 5; //LifeTime diðer change colorlarý yüzdelik hale dönüþtürür. Örneðin 100 olsa lifeTime. Diðerleri 30 + 50 + 20 = 100 olur
+
     public Color targetColor1 = new Color(0.0f, 0.5f, 0.0f); // Koyu yeþil
     public Color targetColor2 = Color.black; // Siyah
     public Color targetColor3 = Color.black; // Siyah
@@ -71,19 +72,18 @@ public class ItemScript : MonoBehaviour
             particleSystemNotTaken.Play();
         }
 
-        delayedTween = DOVirtual.DelayedCall(0.2f, HideSkin);
+        delayedTween = DOVirtual.DelayedCall(0.04f, HideSkin);
 
-        // Ses çal
         PlaySound();
 
-        // 3 saniye bekleyip kendini imha et
+        // biraz bekle ardýndan kendini imha et
         delayedTween = DOVirtual.DelayedCall(1f, () =>
         {
             if (gameObject != null)
             {
                 Destroy(gameObject);
             }
-        });
+        }).SetUpdate(false);
     }
 
     public void PlayerTakedItem()
@@ -100,13 +100,13 @@ public class ItemScript : MonoBehaviour
             particleSystemTaken.Play();
         }
 
-        delayedTween = DOVirtual.DelayedCall(0.2f, HideSkin);
+        delayedTween = DOVirtual.DelayedCall(0.04f, HideSkin);
 
         // 3 saniye bekleyip kendini imha et
         delayedTween = DOVirtual.DelayedCall(1f, () =>
         {
             Destroy(gameObject);
-        });
+        }).SetUpdate(false);
     }
 
     private void HideSkin()
