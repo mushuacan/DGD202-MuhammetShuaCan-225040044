@@ -10,8 +10,6 @@ public class PlayerTakeItem : MonoBehaviour
     public PlayerController playerController;
     public SnakeGrowUp snakeBody;
 
-    public GameObject particleEffectPrefab; // Particle effect prefab'i bu deðiþkene atayýn
-
     public AudioClip[] sounds; // Çalýnacak ses dosyalarý (dizi halinde)
     private AudioSource audioSource; // AudioSource bileþeni
 
@@ -37,14 +35,15 @@ public class PlayerTakeItem : MonoBehaviour
     {
         if (other.gameObject.CompareTag("interactable"))
         {
-            // Toplanan nesneyi yok et
-            Destroy(other.gameObject);
+            if (!other.GetComponent<ItemScript>().etkilendiMi)
+            {
+                playerController.moveSpeedBonus = 5f;
 
-            playerController.moveSpeedBonus = 5f;
-            PlaySound();
-            ActivateParticleEffect(other);
+                CollectedCountIncrease();
 
-            CollectedCountIncrease();
+                other.GetComponent<ItemScript>().PlayerTakedItem();
+                PlaySound();
+            }
         }
     }
 
@@ -66,12 +65,5 @@ public class PlayerTakeItem : MonoBehaviour
     {
         int randomIndex = Random.Range(0, sounds.Length);
         audioSource.PlayOneShot(sounds[randomIndex]);
-    }
-    private void ActivateParticleEffect(Collider other)
-    {
-        if (particleEffectPrefab != null)
-        {
-            Instantiate(particleEffectPrefab, other.transform.position, Quaternion.identity);
-        }
     }
 }

@@ -8,14 +8,16 @@ public class ItemScript : MonoBehaviour
     public float colorChangeTime1 = 3f; // Rengin dönüþüm süresi
     public float colorChangeTime2 = 5f; // Soluklaþma süresi
     public float colorChangeTime3 = 2f; // Soluklaþma süresi
-    public float lifeTime = 5;
+    public float lifeTime = 5; //LifeTime diðer change colorlarý yüzdelik hale dönüþtürür. Örneðin 100 olsa lifeTime. Diðerleri 30 + 50 + 20 = 100 olur
     public Color targetColor1 = new Color(0.0f, 0.5f, 0.0f); // Koyu yeþil
     public Color targetColor2 = Color.black; // Siyah
     public Color targetColor3 = Color.black; // Siyah
-    private Tween colorTween;
+    private Tween delayedTween;
     public Renderer rend;
+    public bool etkilendiMi = false;
 
-    public GameObject particleEffectPrefab; // Particle effect prefab'i bu deðiþkene atayýn
+    public ParticleSystem particleSystemNotTaken;
+    public ParticleSystem particleSystemTaken;
 
     public AudioClip[] sounds; // Çalýnacak ses dosyalarý (dizi halinde)
     private AudioSource audioSource; // AudioSource bileþeni
@@ -32,7 +34,7 @@ public class ItemScript : MonoBehaviour
     void StartColorTransition()
     {
         // Sararmasý
-        colorTween = rend.material.DOBlendableColor(targetColor1, (lifeTime/10) * colorChangeTime1).OnComplete(() =>
+        rend.material.DOBlendableColor(targetColor1, (lifeTime/10) * colorChangeTime1).OnComplete(() =>
         {
             if (rend != null)
             {
@@ -47,11 +49,6 @@ public class ItemScript : MonoBehaviour
                             if (rend != null)
                             {
                                 ItemNotTaken_Destroy();
-                                // 3 saniye bekleyip kendini imha et
-                                DOVirtual.DelayedCall(3f, () =>
-                                {
-                                    Destroy(gameObject);
-                                });
                             }
                         });
                     }
@@ -62,17 +59,60 @@ public class ItemScript : MonoBehaviour
 
     void ItemNotTaken_Destroy()
     {
-        // Particle effect oluþtur
-        if (particleEffectPrefab != null)
+        if (etkilendiMi)
         {
-            Instantiate(particleEffectPrefab, transform.position, Quaternion.identity);
+            return;
+        }
+        etkilendiMi = true;
+
+        // Particle effect oluþtur
+        if (particleSystemNotTaken != null)
+        {
+            particleSystemNotTaken.Play();
         }
 
-        // Objeyi aþaðý taþý
-        transform.position = new Vector3(transform.position.x, transform.position.y - 4, transform.position.z);
+        delayedTween = DOVirtual.DelayedCall(0.2f, HideSkin);
 
         // Ses çal
         PlaySound();
+
+        // 3 saniye bekleyip kendini imha et
+        delayedTween = DOVirtual.DelayedCall(1f, () =>
+        {
+            if (gameObject != null)
+            {
+                Destroy(gameObject);
+            }
+        });
+    }
+
+    public void PlayerTakedItem()
+    {
+        if (etkilendiMi)
+        {
+            return;
+        }
+        etkilendiMi = true;
+
+        // Particle effect oluþtur
+        if (particleSystemTaken != null)
+        {
+            particleSystemTaken.Play();
+        }
+
+        delayedTween = DOVirtual.DelayedCall(0.2f, HideSkin);
+
+        // 3 saniye bekleyip kendini imha et
+        delayedTween = DOVirtual.DelayedCall(1f, () =>
+        {
+            Destroy(gameObject);
+        });
+    }
+
+    private void HideSkin()
+    {
+        //Görüntüyü kapat
+        rend.enabled = !rend.enabled;
     }
 
     private void PlaySound()
@@ -80,12 +120,10 @@ public class ItemScript : MonoBehaviour
         int randomIndex = Random.Range(0, sounds.Length);
         audioSource.PlayOneShot(sounds[randomIndex]);
     }
+
     void OnDestroy()
     {
-        // Tween'leri objeyi yok etmeden önce durdur
-        if (colorTween != null)
-        {
-            colorTween.Kill();
-        }
+        // DelayedCall'ý durdurma
+        delayedTween.Kill();
     }
 }
