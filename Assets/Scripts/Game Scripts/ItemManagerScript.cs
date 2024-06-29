@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Pool;
 
 //Created with ChatGPT and arranged by Mushu
 public class ItemManagerScript : MonoBehaviour
@@ -9,7 +10,7 @@ public class ItemManagerScript : MonoBehaviour
     public GameObject prefab; // Spawnlanacak prefab
     public float spawnInterval = 2f; // Objelerin spawnlanma aralýðý (saniye cinsinden)
     public Vector2 spawnRange = new Vector2(10f, 10f); // Objelerin spawnlanacaðý mesafe aralýðý (x-z ekseninde)
-
+    public ObjectPooler objectPooler;
 
     private void Start()
     {
@@ -30,7 +31,14 @@ public class ItemManagerScript : MonoBehaviour
             Vector3 spawnPosition = new Vector3(randomX, transform.position.y, randomZ);
 
             // Prefabý spawnla
-            Instantiate(prefab, spawnPosition, Quaternion.identity);
+            //Instantiate(prefab, spawnPosition, Quaternion.identity);
+
+            GameObject pooledObject = objectPooler.GetPooledObject();
+            if (pooledObject != null)
+            {
+                pooledObject.transform.position = spawnPosition; 
+                pooledObject.SetActive(true);
+            }
         }
     }
 }

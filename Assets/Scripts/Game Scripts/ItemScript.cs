@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using DG.Tweening;
 using Unity.VisualScripting;
+using UnityEngine.Pool;
 
 public class ItemScript : MonoBehaviour
 {
@@ -10,42 +11,63 @@ public class ItemScript : MonoBehaviour
     public float colorChangeTime3 = 2f; // Soluklaþma süresi
     public float lifeTime = 5; //LifeTime diðer change colorlarý yüzdelik hale dönüþtürür. Örneðin 100 olsa lifeTime. Diðerleri 30 + 50 + 20 = 100 olur
 
-    public Color targetColor1 = new Color(0.0f, 0.5f, 0.0f); // Koyu yeþil
-    public Color targetColor2 = Color.black; // Siyah
-    public Color targetColor3 = Color.black; // Siyah
+    public Color BaseColor;
+    public Color targetColor1;
+    public Color targetColor2;
+    public Color targetColor3;
+    private Tween colorTween;
     private Tween delayedTween;
     public Renderer rend;
-    public bool etkilendiMi = false;
+    public GameObject childObject;
 
     public ParticleSystem particleSystemNotTaken;
     public ParticleSystem particleSystemTaken;
+    public bool etkilendiMi = false;
 
     public AudioClip[] sounds; // Çalýnacak ses dosyalarý (dizi halinde)
     private AudioSource audioSource; // AudioSource bileþeni
+
+    private ObjectPooler objectPooler;
+    private Material originalMaterial;
+
 
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource = GetComponent<AudioSource>();
+
+        Renderer childRenderer = childObject.GetComponent<Renderer>();
+        Material childMaterial = childRenderer.material;
+        originalMaterial = childMaterial;
+
+    }
+
+    private void OnEnable()
+    {
         rend.material.shader = Shader.Find("Standard"); // Standard shader kullanýldýðýndan emin ol
-        rend.material = new Material(rend.material); // Orijinal materyalin bir kopyasýný oluþtur
+        etkilendiMi = false;
+        if (rend != null) {rend.enabled = true;}
+        if (objectPooler == null) {objectPooler = FindObjectOfType<ObjectPooler>();}
+        //rend.material = null; // Önce mevcut materyali temizle
+        //rend.material = originalMaterial; // Sonra özgün materyali geri yükle
         StartColorTransition();
     }
 
-    void StartColorTransition()
+    private void StartColorTransition()
     {
+        rend.material.color = targetColor1;
         // Sararmasý
-        rend.material.DOBlendableColor(targetColor1, (lifeTime/10) * colorChangeTime1).OnComplete(() =>
+        colorTween = rend.material.DOBlendableColor(targetColor1, (lifeTime/10) * colorChangeTime1).OnComplete(() =>
         {
             if (rend != null)
             {
                 // Yaþarmasý
-                rend.material.DOBlendableColor(targetColor2, (lifeTime / 10) * colorChangeTime2).OnComplete(() =>
+                colorTween = rend.material.DOBlendableColor(targetColor2, (lifeTime / 10) * colorChangeTime2).OnComplete(() =>
                 {
                     if (rend != null)
                     {
                         //Kararmasý
-                        rend.material.DOBlendableColor(targetColor3, (lifeTime / 10) * colorChangeTime3).OnComplete(() =>
+                        colorTween = rend.material.DOBlendableColor(targetColor3, (lifeTime / 10) * colorChangeTime3).OnComplete(() =>
                         {
                             if (rend != null)
                             {
@@ -72,18 +94,9 @@ public class ItemScript : MonoBehaviour
             particleSystemNotTaken.Play();
         }
 
-        delayedTween = DOVirtual.DelayedCall(0.04f, HideSkin);
-
         PlaySound();
-
-        // biraz bekle ardýndan kendini imha et
-        delayedTween = DOVirtual.DelayedCall(1f, () =>
-        {
-            if (gameObject != null)
-            {
-                Destroy(gameObject);
-            }
-        }).SetUpdate(false);
+        
+        DestroyYourSelf();
     }
 
     public void PlayerTakedItem()
@@ -100,12 +113,16 @@ public class ItemScript : MonoBehaviour
             particleSystemTaken.Play();
         }
 
+        DestroyYourSelf();
+    }
+
+    private void DestroyYourSelf()
+    {
         delayedTween = DOVirtual.DelayedCall(0.04f, HideSkin);
 
-        // 3 saniye bekleyip kendini imha et
         delayedTween = DOVirtual.DelayedCall(1f, () =>
         {
-            Destroy(gameObject);
+            objectPooler.ReturnToPool(gameObject);
         }).SetUpdate(false);
     }
 
@@ -120,10 +137,13 @@ public class ItemScript : MonoBehaviour
         int randomIndex = Random.Range(0, sounds.Length);
         audioSource.PlayOneShot(sounds[randomIndex]);
     }
-
-    void OnDestroy()
+    private void OnDisable()
     {
+        particleSystemNotTaken.DOPause();
+        particleSystemTaken.DOPause();
+
         // DelayedCall'ý durdurma
-        delayedTween.Kill();
+        delayedTween.Kill(); 
+        colorTween.Kill();
     }
 }

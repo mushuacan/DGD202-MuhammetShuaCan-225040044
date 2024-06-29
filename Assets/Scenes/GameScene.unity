@@ -11622,7 +11622,6 @@ MonoBehaviour:
   collectedCount: 0
   playerController: {fileID: 317962277}
   snakeBody: {fileID: 555478996}
-  particleEffectPrefab: {fileID: 180128, guid: 6586ff0f14125534cae2f5d8f04b7871, type: 3}
   sounds:
   - {fileID: 8300000, guid: 64ca405306a312844a5c23bd9eeff1c1, type: 3}
   - {fileID: 8300000, guid: bb82f22036d5fc04da0ec53a7a9c49e5, type: 3}
@@ -20663,6 +20662,7 @@ MonoBehaviour:
   audioManager: {fileID: 317962284}
   gameEnded: 0
   endMusicStarted: 0
+  didMusicCancelled: 0
   audioSource: {fileID: 567394192}
   endMusicClip: {fileID: 8300000, guid: 0baafa65f29bf99419cbf8e8b86ddcb9, type: 3}
 --- !u!4 &567394191
@@ -34897,6 +34897,7 @@ GameObject:
   m_Component:
   - component: {fileID: 969922939}
   - component: {fileID: 969922938}
+  - component: {fileID: 969922940}
   m_Layer: 0
   m_Name: ItemManager
   m_TagString: Untagged
@@ -34919,6 +34920,7 @@ MonoBehaviour:
   prefab: {fileID: 1985319204337406029, guid: 1697fb4cd06db4f4eb20fc558ff09e7f, type: 3}
   spawnInterval: 0.5
   spawnRange: {x: -10, y: 10}
+  objectPooler: {fileID: 969922940}
 --- !u!4 &969922939
 Transform:
   m_ObjectHideFlags: 0
@@ -34934,6 +34936,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &969922940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969922937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe4be68192b2e74fb773366d9ad3339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToPool: {fileID: 1985319204337406029, guid: 1697fb4cd06db4f4eb20fc558ff09e7f, type: 3}
+  amountToPool: 14
+  parentTransform: {fileID: 969922939}
 --- !u!4 &970679410 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4408158000586952, guid: 55e73b62d9426bc4fbbb29492d789f37, type: 3}
