@@ -9,6 +9,7 @@ public class PlayerTakeItem : MonoBehaviour
 
     public PlayerController playerController;
     public SnakeGrowUp snakeBody;
+    public SnakeScale snakeScale;
 
     public AudioClip[] sounds; // Çalýnacak ses dosyalarý (dizi halinde)
     private AudioSource audioSource; // AudioSource bileþeni
@@ -53,7 +54,7 @@ public class PlayerTakeItem : MonoBehaviour
         collectedCount += howMuch;
         UpdateUICollectedItem();
         snakeBody.Collect();
-
+        snakeScale.ArrangeScale(collectedCount, 1);
     }
 
     private void UpdateUICollectedItem()

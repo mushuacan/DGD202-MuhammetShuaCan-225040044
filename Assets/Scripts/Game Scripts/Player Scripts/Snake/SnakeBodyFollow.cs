@@ -19,7 +19,7 @@ public class SnakeBodyFollow : MonoBehaviour
             transform.LookAt(targetPosition);
 
             // Takip eden objenin, takip edilen objeye doðru hareket etmesi
-            Vector3 newPosition = targetPosition - transform.forward * distance;
+            Vector3 newPosition = targetPosition - transform.forward * distance * transform.localScale.x;
 
             // Yeni konumu uygula
             transform.position = newPosition;

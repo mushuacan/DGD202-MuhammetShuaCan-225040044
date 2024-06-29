@@ -8,18 +8,28 @@ public class SnakeBody : MonoBehaviour
 
     private float timer = 0f;
 
+    public SnakeScale snakeScale;
+
     private void Start()
     {
-        timer = position / 3;
+        timer = position / 3f;
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
         // Karakteri saða veya sola salla
         if (Time.timeScale != 0f)
         {
-            transform.localPosition += (Vector3.right * Mathf.Sin(Time.time * 8) * swaySpeed * 0.003f * howMuchSway / position);
+            timer += Time.deltaTime;
+            transform.localPosition += (Vector3.right * Mathf.Sin(timer * 8) * swaySpeed * 0.003f * howMuchSway / position);
+        }
+        if(Mathf.Sin(timer) == 0f)
+        {
+            transform.localPosition = new Vector3(0, transform.position.y, transform.position.z);
+        }
+        if (snakeScale != null)
+        {
+            snakeScale.ArrangeScale(-1, position);
         }
     }
 
@@ -28,5 +38,9 @@ public class SnakeBody : MonoBehaviour
     {
         position = index * 2;
         howMuchSway = 1f / (7f - position);
+        if (howMuchSway < 0f)
+        {
+            howMuchSway = 0;
+        }
     }
 }

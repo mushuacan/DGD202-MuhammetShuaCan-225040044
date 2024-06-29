@@ -100,6 +100,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100002, guid: 5ec297cc131de0446b7c9ccce392b15b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4097006730068938850}
+    - targetCorrespondingSourceObject: {fileID: 100002, guid: 5ec297cc131de0446b7c9ccce392b15b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8271388497760455562}
   m_SourcePrefab: {fileID: 100100000, guid: 5ec297cc131de0446b7c9ccce392b15b, type: 3}
 --- !u!1 &6253787905815953662 stripped
 GameObject:
@@ -121,6 +124,7 @@ MonoBehaviour:
   swaySpeed: 2
   position: 4
   howMuchSway: 1
+  snakeScale: {fileID: 8271388497760455562}
 --- !u!114 &4097006730068938850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +139,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   distance: 0.3
+--- !u!114 &8271388497760455562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6253787905815953662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d31050c0c8500f4da26380503d52949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollects: {fileID: 0}
 --- !u!4 &6253787905816059102 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 5ec297cc131de0446b7c9ccce392b15b, type: 3}
